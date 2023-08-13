@@ -1,0 +1,13 @@
+{% extends "home.html" %}
+
+{% block content %} 
+{% load tailwind_filters %}
+<div class="m-5 p-10">
+    <h2 class="items-center p-2" >Update Journal</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="text-lg rounded border border-green p-4 px-5 bg-teal-300 hover:bg-teal-500" type="submit">Save</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "home.html" %}
+
+{% block content %} 
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}         
+
+<!--Register--> 
+<div class="m-5 p-10">
+	<h1>Register</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ register_form|crispy }}                    
+		<button class="text-lg rounded border border-green p-4 px-5 bg-teal-300 hover:bg-teal-500" type="submit">Register</button>
+	</form>
+	<p class="text-center">If you already have an account, <a href="/login" class="hover:text-blue-500">login</a> instead.</p>
+</div>
+
+{% endblock %}

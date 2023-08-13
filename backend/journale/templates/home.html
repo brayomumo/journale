@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="mx-2 p-8">
+    {% if count > 0 %}
+    <h2 class="centered text-bold text-center">Journals for {{request.user}}.</h2>
+    <div>
+        {% for journ in journals %}
+            <div class="rounded-xl p-10 m-5 relative bg-slate-200">
+                <a href="/update/{{journ.id}}">
+                <h3><b>{{journ.title}}</b></h3>
+                <p class="italic absolute bottom-1 right-5 indent-8">{{journ.created}}</p>
+                <p>{{journ.text}}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {% else%}
+    <block >
+        <div class="p-10 m-10">
+            <h3>You Dont have any Journals, <a href="/new" class=" hover:p-2 hover:rounded-lg hover:text-teal-500 hover:bg-white">start Journaling now</a></h3>
+        </div>
+    </block>
+    {% endif %}
+</div>
+
+    
+{% endblock %}

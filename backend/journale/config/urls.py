@@ -22,6 +22,8 @@ from journale.wenyeji.urls import userRouter
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", include("journale.journal.urls")),
+    path("users/", include("journale.wenyeji.urls")),
     path("api/journal/", include(journalRouter.urls)),
     path("api/users/", include(userRouter.urls))
 ]
