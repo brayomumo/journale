@@ -1,0 +1,17 @@
+{% extends "home.html" %}
+
+{% block content %} 
+{% load tailwind_filters %}
+
+<!--Login--> 
+<div class="m-5 p-10">
+    <h2 class="items-center p-2" >Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ login_form|crispy }}
+      <button class="text-lg rounded border border-green p-4 px-5 bg-teal-300 hover:bg-teal-500" type="submit">Login</button>
+    </form>
+    <p class="text-center">Don't have an account? <a href="/users/register" class="text-blue-500 hover:text-blue-300">Create an account</a>.</p>
+  </div>
+  
+{% endblock %}
