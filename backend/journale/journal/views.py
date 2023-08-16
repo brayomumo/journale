@@ -13,10 +13,7 @@ def get_journals(request):
     if request.user.is_authenticated:
         user = request.user
         journals = Journal.objects.filter(owner=user)
-        context = {
-            "count": journals.count(),
-            "journals": journals
-        }
+        context = {"count": journals.count(), "journals": journals}
         return render(request, "home.html", context=context)
     else:
         return redirect("/users/login")
@@ -35,14 +32,17 @@ def create_journal(request):
                 return redirect("/")
             messages.error(request, "Error saving Journal!")
         form = JournalForm()
-        return render(request, "journal/new_journal.html", context={"new_journal": form})
+        return render(
+            request, "journal/new_journal.html", context={"new_journal": form}
+        )
     else:
         return redirect("/users/login")
+
 
 def update_journal(request, id):
     if request.user.is_authenticated:
         journal = get_object_or_404(Journal, id=id, owner=request.user)
-        if request.method =="POST":
+        if request.method == "POST":
             form = JournalForm(request.POST or None, instance=journal)
             if form.is_valid():
                 journ = form.save(commit=False)
@@ -52,13 +52,12 @@ def update_journal(request, id):
                 return redirect("/")
             messages.error(request, "Error Updating Journal!")
         form = JournalForm(instance=journal)
-        return render(request, "journal/update_journal.html", context={"form":form})
+        return render(request, "journal/update_journal.html", context={"form": form})
     else:
         return redirect("/users/login")
+
 
 # API
 class JournalViewset(viewsets.ModelViewSet):
     queryset = Journal.objects.all()
     serializer_class = JournalSerializer
-
-

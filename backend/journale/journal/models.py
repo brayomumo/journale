@@ -4,15 +4,13 @@ from django.utils import timezone
 
 from journale.common.models import BaseModel
 
+
 class Journal(BaseModel):
     title = models.CharField(max_length=200)
     text = models.TextField()
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="journal_owner",
-        on_delete=models.PROTECT
-        )
-    
+        settings.AUTH_USER_MODEL, related_name="journal_owner", on_delete=models.PROTECT
+    )
 
     @classmethod
     def last_24_hrs(cls):
@@ -21,4 +19,3 @@ class Journal(BaseModel):
         """
         last_24hrs = timezone.now() - timezone.timedelta(hours=24)
         return cls.objects.filter(created__gte=last_24hrs)
-
